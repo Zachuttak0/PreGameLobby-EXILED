@@ -1,7 +1,7 @@
 ﻿using Exiled.API.Features.Items;
 using MEC;
 using PlayerRoles;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PreGameLobby.Runners
 {
@@ -16,30 +16,30 @@ namespace PreGameLobby.Runners
                     if (_player.Role == RoleTypeId.Tutorial)
                     {
                         PreGameLobby.Instance.PreGameLobbyrngNum = PreGameLobby.PreGameLobbyrngGen.Next(1, 20);
-                        if (PreGameLobby.Instance.PreGameLobbyrngNum == 20)
+                        if (PreGameLobby.Instance.PreGameLobbyrngNum == 19)
                         {
                             _player.AddItem(Firearm.Create(ItemType.Jailbird));
-                            _player.Broadcast(10, "You got a Jailbird", Broadcast.BroadcastFlags.Normal, true);
-                        }
-                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 19)
-                        {
-                            _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Red);
-                            _player.Broadcast(10, "You got a Red Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
+                            _player.Broadcast(10, "You got a Jailbird (if you have room)", Broadcast.BroadcastFlags.Normal, true);
                         }
                         else if (PreGameLobby.Instance.PreGameLobbyrngNum == 18)
                         {
-                            _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Red);
-                            _player.Broadcast(10, "You got a Red Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
+                            _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Pink);
+                            _player.Broadcast(10, "You got a Pink Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
                         }
                         else if (PreGameLobby.Instance.PreGameLobbyrngNum == 17)
                         {
                             _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Yellow);
                             _player.Broadcast(10, "You got a Yellow Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
                         }
-                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 16)
+                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 15)
                         {
-                            _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Yellow);
-                            _player.Broadcast(10, "You got a Yellow Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
+                            _player.AddItem(Firearm.Create(ItemType.GunCom45));
+                            _player.Broadcast(10, "You got a Com-45 (if you have room) (no reloads)", Broadcast.BroadcastFlags.Normal, true);
+                        }
+                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 14)
+                        {
+                            _player.AddItem(Firearm.Create(ItemType.GunA7));
+                            _player.Broadcast(10, "You got a A7 (if you have room) (no reloads)", Broadcast.BroadcastFlags.Normal, true);
                         }
                     }
                 }
@@ -47,12 +47,22 @@ namespace PreGameLobby.Runners
         }
         public static void StartItemSpawner()
         {
-            while (PreGameLobby.Instance.PreGameLobbyItemDrops)
+            Timing.RunCoroutine(_UpdateTime(), Segment.SlowUpdate);
+            Timing.Instance.TimeBetweenSlowUpdateCalls = 3f;
+        }
+        private static IEnumerator<float> _UpdateTime()
+        {
+            while (true)
             {
-                Timing.CallDelayed(3f, () => // 3 secs
+                if (PreGameLobby.Instance.PreGameLobbyItemDrops)
                 {
                     PreGameLobbyItemSpawner();
-                });
+                }
+                else
+                {
+                    yield break;
+                }
+                yield return 3f;
             }
         }
     }

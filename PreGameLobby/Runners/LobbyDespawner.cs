@@ -19,7 +19,7 @@ namespace PreGameLobby.Runners
             Map.CleanAllRagdolls();
             foreach (Pickup pickup in Pickup.List)
             {
-                if ((pickup.Type == ItemType.Jailbird) || (pickup.Type == ItemType.SCP330))
+                if (((pickup.Type == ItemType.Jailbird) || (pickup.Type == ItemType.SCP330)) || ((pickup.Type == ItemType.GunCom45) || (pickup.Type == ItemType.GunA7)))
                 {
                     pickup.UnSpawn();
                 }

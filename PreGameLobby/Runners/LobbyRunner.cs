@@ -1,6 +1,6 @@
 ﻿using PlayerRoles;
-using System.Threading.Tasks;
 using MEC;
+using System.Collections.Generic;
 
 namespace PreGameLobby.Runners
 {
@@ -23,12 +23,22 @@ namespace PreGameLobby.Runners
         }
         public static void StartLobbySpawner()
         {
-            while (PreGameLobby.Instance.PreGameLobbyRunNow)
+            Timing.RunCoroutine(_UpdateTime(), Segment.SlowUpdate);
+            Timing.Instance.TimeBetweenSlowUpdateCalls = 4f;
+        }
+        private static IEnumerator<float> _UpdateTime()
+        {
+            while (true)
             {
-                Timing.CallDelayed(4f, () => // 4 secs
+                if(PreGameLobby.Instance.PreGameLobbyRunNow)
                 {
                     PreGameLobbySpawner();
-                });
+                }
+                else
+                {
+                    yield break;
+                }
+                yield return 4f;
             }
         }
     }

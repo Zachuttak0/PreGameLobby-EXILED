@@ -1,8 +1,6 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
-using System.Threading.Tasks;
 using Exiled.Events.EventArgs.Server;
-using Exiled.Events.EventArgs.Player;
 using MEC;
 
 namespace PreGameLobby
@@ -33,11 +31,13 @@ namespace PreGameLobby
         {
             Exiled.Events.Handlers.Server.WaitingForPlayers += PreGameLobbyStartRunning;
             Exiled.Events.Handlers.Server.ChoosingStartTeamQueue += PreGameLobbyStopRunning;
+            Exiled.Events.Handlers.Server.EndingRound += JustInCaseFailsafe;
         }
         public void PreGameLobbyUnregisterEvents()
         {
             Exiled.Events.Handlers.Server.WaitingForPlayers -= PreGameLobbyStartRunning;
             Exiled.Events.Handlers.Server.ChoosingStartTeamQueue -= PreGameLobbyStopRunning;
+            Exiled.Events.Handlers.Server.EndingRound -= JustInCaseFailsafe;
         }
         public void PreGameLobbyStartRunning()
         {
@@ -52,11 +52,15 @@ namespace PreGameLobby
         {
             PreGameLobbyItemDrops = false;
             PreGameLobbyRunNow = false;
+            Runners.LobbyDespawner.PreGameLobbyDeSpawner();
             Timing.CallDelayed(0.1f, () => // 0.1 secs
             {
-                Runners.LobbyDespawner.PreGameLobbyDeSpawner();
                 Runners.FFoff.TurnFfOff();
             });
+        }
+        public void JustInCaseFailsafe(EndingRoundEventArgs ev)
+        {
+            Timing.KillCoroutines();
         }
         private PreGameLobby()
         {
