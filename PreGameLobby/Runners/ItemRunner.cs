@@ -15,31 +15,105 @@ namespace PreGameLobby.Runners
                 {
                     if (_player.Role == RoleTypeId.Tutorial)
                     {
-                        PreGameLobby.Instance.PreGameLobbyrngNum = PreGameLobby.PreGameLobbyrngGen.Next(1, 20);
-                        if (PreGameLobby.Instance.PreGameLobbyrngNum == 19)
+                        int rngNum = PreGameLobby.PreGameLobbyrngGen.Next(1, 10);
+                        int rngINum = PreGameLobby.PreGameLobbyrngGen.Next(1, 20);
+                        int rngCNum = PreGameLobby.PreGameLobbyrngGen.Next(1, 7);
+                        if (rngNum == 9)
                         {
-                            _player.AddItem(Firearm.Create(ItemType.Jailbird));
-                            _player.Broadcast(10, "You got a Jailbird (if you have room)", Broadcast.BroadcastFlags.Normal, true);
-                        }
-                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 18)
-                        {
-                            _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Pink);
-                            _player.Broadcast(10, "You got a Pink Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
-                        }
-                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 17)
-                        {
-                            _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Yellow);
-                            _player.Broadcast(10, "You got a Yellow Candy (if you have room)", Broadcast.BroadcastFlags.Normal, true);
-                        }
-                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 15)
-                        {
-                            _player.AddItem(Firearm.Create(ItemType.GunCom45));
-                            _player.Broadcast(10, "You got a Com-45 (if you have room) (no reloads)", Broadcast.BroadcastFlags.Normal, true);
-                        }
-                        else if (PreGameLobby.Instance.PreGameLobbyrngNum == 14)
-                        {
-                            _player.AddItem(Firearm.Create(ItemType.GunA7));
-                            _player.Broadcast(10, "You got a A7 (if you have room) (no reloads)", Broadcast.BroadcastFlags.Normal, true);
+                            if (rngINum == 2)
+                            {
+                                if (rngCNum == 1)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Rainbow);
+                                }
+                                else if (rngCNum == 2)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Yellow);
+                                }
+                                else if (rngCNum == 3)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Purple);
+                                }
+                                else if (rngCNum == 4)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Red);
+                                }
+                                else if (rngCNum == 5)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Green);
+                                }
+                                else if (rngCNum == 6)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Blue);
+                                }
+                                else if (rngCNum == 7)
+                                {
+                                    _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Pink);
+                                }
+                            }
+                            else if (rngINum == 4)
+                            {
+                                _player.AddItem(Item.Create(ItemType.MicroHID));
+                            }
+                            else if (rngINum == 3)
+                            {
+                                _player.AddItem(Item.Create(ItemType.SCP018));
+                            }
+                            else if (rngINum == 5)
+                            {
+                                _player.AddItem(Item.Create(ItemType.ParticleDisruptor));
+                            }
+                            else if (rngINum == 6)
+                            {
+                                _player.AddItem(Item.Create(ItemType.SCP207));
+                            }
+                            else if (rngINum == 7)
+                            {
+                                _player.AddItem(Item.Create(ItemType.AntiSCP207));
+                            }
+                            else if (rngINum == 8)
+                            {
+                                _player.AddItem(Item.Create(ItemType.Jailbird));
+                            }
+                            else if (rngINum == 1)
+                            {
+                                _player.TryAddCandy(InventorySystem.Items.Usables.Scp330.CandyKindID.Pink);
+                            }
+                            else if (rngINum == 9)
+                            {
+                                _player.AddItem(Item.Create(ItemType.GrenadeHE));
+                            }
+                            else if (rngINum == 10)
+                            {
+                                _player.AddItem(Item.Create(ItemType.GrenadeFlash));
+                            }
+                            else if (rngINum == 11)
+                            {
+                                _player.AddItem(Item.Create(ItemType.GunCom45));
+                                _player.AddItem(Item.Create(ItemType.Ammo9x19));
+                                _player.AddItem(Item.Create(ItemType.Ammo9x19));
+                                _player.AddItem(Item.Create(ItemType.Ammo9x19));
+                            }
+                            else if (rngINum == 12)
+                            {
+                                _player.AddItem(Item.Create(ItemType.GunA7));
+                                _player.AddItem(Item.Create(ItemType.Ammo762x39));
+                                _player.AddItem(Item.Create(ItemType.Ammo762x39));
+                                _player.AddItem(Item.Create(ItemType.Ammo762x39));
+                            }
+                            else if (rngINum == 13)
+                            {
+                                _player.AddItem(Item.Create(ItemType.SCP500));
+                            }
+                            else if (rngINum == 14)
+                            {
+                                _player.AddItem(Item.Create(ItemType.Coin));
+                            }
+                            else
+                            {
+                                _player.AddItem(Item.Create(ItemType.SCP018));
+                            }
+                            _player.Broadcast(10, "Check Your Inventory ;)", Broadcast.BroadcastFlags.Normal, true);
                         }
                     }
                 }

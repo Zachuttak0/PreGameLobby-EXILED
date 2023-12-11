@@ -17,11 +17,12 @@ namespace PreGameLobby.Runners
                 }
             }
             Map.CleanAllRagdolls();
+            Log.Info("Made by zachuttak0 (discord)");
             foreach (Pickup pickup in Pickup.List)
             {
-                if (((pickup.Type == ItemType.Jailbird) || (pickup.Type == ItemType.SCP330)) || ((pickup.Type == ItemType.GunCom45) || (pickup.Type == ItemType.GunA7)))
+                if (depend.ItemCheck.PreGameLobbyItemCheck(pickup.Position))
                 {
-                    pickup.UnSpawn();
+                    pickup.Destroy();
                 }
             }
         }
