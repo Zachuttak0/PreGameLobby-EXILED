@@ -13,14 +13,19 @@ namespace PreGameLobby
         public static System.Random PreGameLobbyrngGen = new System.Random();
         public bool PreGameLobbyItemDrops = false;
         public bool PreGameLobbyRunNow = false;
+        public bool PreGameLobbyDeathRunning = false;
+        public int PreGameLobbyCountDownMis;
+        public string PreGameLobbyStringMis;
         public bool PreGameLobbyBarOn = false;
+        public bool PreGameLobbyEvent = false;
         public static Primitive PreGameLobbyBar;
         public void PreGameLobbyVarsReset()
         {
             PreGameLobbyItemDrops = PreGameLobby.Instance.Config.ItemDrops;
             PreGameLobbyRunNow = true;
             PreGameLobbyBarOn = false;
-            PreGameLobbyBar = Primitive.Create(UnityEngine.PrimitiveType.Plane, new UnityEngine.Vector3(-1, 1000, -8), new UnityEngine.Vector3(180, 0, 0), new UnityEngine.Vector3(10, 10, 10), true, new UnityEngine.Color(0, 0, 0));
+            PreGameLobbyDeathRunning = false;
+            PreGameLobbyBar = Primitive.Create(UnityEngine.PrimitiveType.Plane, new UnityEngine.Vector3((float)-1, 1000, -8), new UnityEngine.Vector3(180, 0, 0), new UnityEngine.Vector3((float)2.5, (float)2.5, (float)1.2), true, new UnityEngine.Color(0, 0, 0));
         }
         public override void OnEnabled()
         {
@@ -35,12 +40,14 @@ namespace PreGameLobby
             Exiled.Events.Handlers.Server.WaitingForPlayers += PreGameLobbyStartRunning;
             Exiled.Events.Handlers.Server.ChoosingStartTeamQueue += PreGameLobbyStopRunning;
             Exiled.Events.Handlers.Server.EndingRound += JustInCaseFailsafe;
+            Exiled.Events.Handlers.Player.Died += Events.Handlers.PlayerDied;
         }
         public void PreGameLobbyUnregisterEvents()
         {
             Exiled.Events.Handlers.Server.WaitingForPlayers -= PreGameLobbyStartRunning;
             Exiled.Events.Handlers.Server.ChoosingStartTeamQueue -= PreGameLobbyStopRunning;
             Exiled.Events.Handlers.Server.EndingRound -= JustInCaseFailsafe;
+            Exiled.Events.Handlers.Player.Died -= Events.Handlers.PlayerDied;
         }
         public void PreGameLobbyStartRunning()
         {

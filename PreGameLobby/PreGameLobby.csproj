@@ -42,6 +42,9 @@
     <Reference Include="Assembly-CSharp-Publicized">
       <HintPath>..\..\..\..\Desktop\parts\Exiled\References\Assembly-CSharp-Publicized.dll</HintPath>
     </Reference>
+    <Reference Include="CommandSystem.Core">
+      <HintPath>..\..\..\..\Desktop\parts\Exiled\References\CommandSystem.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Exiled.API">
       <HintPath>..\..\..\..\Desktop\parts\Exiled\SCP Secret Laboratory\PluginAPI\plugins\global\dependencies\Exiled.API.dll</HintPath>
     </Reference>
@@ -63,9 +66,6 @@
     <Reference Include="Exiled.Permissions">
       <HintPath>..\..\..\..\Desktop\parts\Exiled\EXILED\Plugins\Exiled.Permissions.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Posix">
-      <HintPath>..\..\..\..\Desktop\parts\Exiled\EXILED\Plugins\dependencies\Mono.Posix.dll</HintPath>
-    </Reference>
     <Reference Include="SemanticVersioning">
       <HintPath>..\..\..\..\Desktop\parts\Exiled\SCP Secret Laboratory\PluginAPI\plugins\global\dependencies\SemanticVersioning.dll</HintPath>
     </Reference>
@@ -83,7 +83,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DeathMatchCom.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Events\DeathMatch.cs" />
+    <Compile Include="Events\Handlers.cs" />
+    <Compile Include="Events\Sub-Running\DeathMatchSub.cs" />
     <Compile Include="PreGameLobby.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runners\depend\Bar.cs" />

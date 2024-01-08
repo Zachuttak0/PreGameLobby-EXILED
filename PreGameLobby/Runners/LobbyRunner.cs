@@ -14,9 +14,16 @@ namespace PreGameLobby.Runners
                 {
                     if ((_player.Role == RoleTypeId.Spectator) || (_player.Role == RoleTypeId.None))
                     {
-                        _player.Role.Set(RoleTypeId.Tutorial);
-                        _player.Teleport(new UnityEngine.Vector3(8, 998, -8));
-                        _player.SetFriendlyFire(RoleTypeId.Tutorial, 1);
+                        if (!PreGameLobby.Instance.PreGameLobbyEvent)
+                        {
+                            _player.Role.Set(RoleTypeId.Tutorial);
+                            _player.Teleport(new UnityEngine.Vector3(8, 998, -8));
+                            _player.SetFriendlyFire(RoleTypeId.Tutorial, 1);
+                        }
+                    }
+                    if ((_player.Role == RoleTypeId.None) && (PreGameLobby.Instance.PreGameLobbyEvent))
+                    {
+                        _player.Role.Set(RoleTypeId.Spectator);
                     }
                 }
             }
@@ -30,7 +37,7 @@ namespace PreGameLobby.Runners
         {
             while (true)
             {
-                if(PreGameLobby.Instance.PreGameLobbyRunNow)
+                if (PreGameLobby.Instance.PreGameLobbyRunNow)
                 {
                     PreGameLobbySpawner();
                 }

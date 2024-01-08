@@ -13,7 +13,8 @@ namespace PreGameLobby.Runners
                 if (_player.Role == RoleTypeId.Tutorial)
                 {
                     _player.ClearInventory();
-                    _player.Kill("Round is Starting");
+                    _player.Kill("");
+                    _player.ClearBroadcasts();
                 }
             }
             Map.CleanAllRagdolls();

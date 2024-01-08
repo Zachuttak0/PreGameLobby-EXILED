@@ -18,6 +18,10 @@ namespace PreGameLobby.Runners
                         int rngNum = PreGameLobby.PreGameLobbyrngGen.Next(1, 10);
                         int rngINum = PreGameLobby.PreGameLobbyrngGen.Next(1, 20);
                         int rngCNum = PreGameLobby.PreGameLobbyrngGen.Next(1, 7);
+                        if (PreGameLobby.Instance.PreGameLobbyEvent)
+                        {
+                            rngNum = 2;
+                        }
                         if (rngNum == 9)
                         {
                             if (rngINum == 2)

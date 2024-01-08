@@ -7,9 +7,11 @@ namespace PreGameLobby
     {
         [Description("Turn the plugin on and off (true for on, false for off)")]
         public bool IsEnabled { get; set; } = true;
-        [Description("Exiled makes me add 'Debug', no clue what it does so I wouldn't touch it")]
+        [Description("adds info to debug problems into the console")]
         public bool Debug { get; set; } = false;
         [Description("If 'true' then there will be items spawning in the pre-game lobby (ie. Jailbird, Pink Candy, ex...)")]
         public bool ItemDrops { get; set; } = true;
+        [Description("Determinans if admins can start a death match in the pregame lobby")]
+        public bool Death { get; set; } = true;
     }
 }
