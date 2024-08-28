@@ -3,6 +3,7 @@ using Exiled.API.Features;
 using Exiled.API.Features.Toys;
 using Exiled.Events.EventArgs.Server;
 using MEC;
+using UnityEngine;
 
 namespace PreGameLobby
 {
@@ -54,6 +55,7 @@ namespace PreGameLobby
             PreGameLobbyVarsReset();
             Runners.depend.Bar.PreGameLobbyBarSpawn();
             Runners.LobbyRunner.StartLobbySpawner();
+            GameObject.Find("StartRound").transform.localScale = Vector3.zero;
             Timing.CallDelayed(0.1f, () => // 0.1 secs
             {
                 Runners.ItemRunner.StartItemSpawner();
